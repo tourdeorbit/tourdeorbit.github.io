@@ -127,13 +127,17 @@ class Log {
     }
     initiateVariable(variableHTML, variableJS, variableDisplay, units) {
         // property element
-        let property = document.createElement("p");
-        property.classList.add("property");
-        property.innerHTML = variableDisplay;
+        let propertyName = document.createElement("p");
+        propertyName.classList.add("property_name");
+        propertyName.innerHTML = variableDisplay;
         // unit element
         let unit = document.createElement("p");
         unit.classList.add("unit");
         unit.innerHTML = `/${units}`;
+        let property = document.createElement("div");
+        property.classList.add("property");
+        property.appendChild(propertyName);       
+        property.appendChild(unit);       
         // value element
         let value = document.createElement("p");
         value.classList.add("value");
@@ -143,7 +147,6 @@ class Log {
         div.id = variableHTML;
         // append all those elements to main div
         div.appendChild(property);
-        div.appendChild(unit);
         div.appendChild(value);
         // throw this new div to DOM via logHolder
         this.logHolder.appendChild(div);

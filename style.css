@@ -34,9 +34,18 @@ button {
 }
 
 .property {
+    display: flex;
+    flex-direction: row;
+    width: 75%;
+    justify-content: space-between;
+}
+
+.property_name {
+    display: inline-block;
 }
 
 .unit {
+    display: inline-block;
     color: blanchedalmond;
 }
 
