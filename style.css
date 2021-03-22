@@ -2,7 +2,7 @@
     margin: 0;
     padding: 0;
     border: none;
-    background-color: black;
+    background-color: black; 
 }
 
 button {
@@ -54,6 +54,6 @@ button {
     font-size: large;
 }
 
-.log_holder, .log, .property, .value {
+.log_holder, .log, .property, .property_name, .unit, .value {
     background: none;
 }

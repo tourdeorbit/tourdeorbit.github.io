@@ -75,5 +75,22 @@ function interact() {
             starMass.style("backgroundColor", normalColor);
         }
     }
+    let zoomColor = "rgba(50, 50, 200, 0.5)";
+    let zoomOut = createButton("-");
+    zoomOut.mouseClicked(() => {
+        sscale *= 1.2;
+        vscale = sscale / tscale;
+    });
+    zoomOut.position((width * 2 / 3) - 120, height-25);
+    zoomOut.style("width", "40px");
+    zoomOut.style("backgroundColor", zoomColor);
+    let zoomIn = createButton("+");
+    zoomIn.mouseClicked(() => {
+        sscale /= 1.2;
+        vscale = sscale / tscale;
+    });
+    zoomIn.position((width*2/3) - 79, height-25);
+    zoomIn.style("width", "40px");
+    zoomIn.style("backgroundColor", zoomColor);
 }
 
