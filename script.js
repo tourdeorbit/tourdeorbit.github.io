@@ -27,8 +27,8 @@ function draw() {
     translate(width/3, height/2);
     planetAndOrbit(planet);
     star();
-    animate();
     logger();
+    animate();
 }
 
 function mouseClicked() {
@@ -36,27 +36,48 @@ function mouseClicked() {
 }
 
 function planetAndOrbit(planet) {
-    rotate(planet.phi);
-    translate(planet.fd/sscale, 0);
+    
     noFill();
     stroke(255, 100);
+    rotate(planet.phi);
+    translate(planet.fd/sscale, 0);
     // the path
-    ellipse(0, 0, 2*planet.a/sscale, 2*planet.b/sscale);
+    if (planet.E < 0) {
+        ellipse(0, 0, 2*planet.a/sscale, 2*planet.b/sscale);
+    } else {
+        let startTh = atan(biglength*sscale/planet.b);
+        let endTh = -startTh;
+        let step = (endTh-startTh)/100;
+        startTh+=PI;
+        endTh+=PI;
+        beginShape();
+        for (let th = startTh; step*(endTh-th)>= 0; th += step) {
+            vertex((planet.a/sscale)/cos(th), (planet.b/sscale)*tan(th));
+        }
+        endShape();
+    }
     // directrices
     line(-planet.gd/sscale, -biglength, -planet.gd/sscale, biglength);
-    line(planet.gd/sscale, -biglength, planet.gd/sscale, biglength);
+    if (planet.E < 0) {
+        line(planet.gd/sscale, -biglength, planet.gd/sscale, biglength);
+    }
     stroke(255, 50);
     // to focal points
     line(-planet.fd/sscale, 0, planet.x/sscale, planet.y/sscale);
-    line(planet.fd/sscale, 0, planet.x/sscale, planet.y/sscale);
+    if (planet.E < 0) {
+        line(planet.fd/sscale, 0, planet.x/sscale, planet.y/sscale);
+    }
     // to directrices
     if (planet.e < 0.1) {
         stroke(255, 15);
     }
     line(-planet.gd/sscale, planet.y/sscale, planet.x/sscale, planet.y/sscale);
-    line(planet.gd/sscale, planet.y/sscale, planet.x/sscale, planet.y/sscale);
+    if (planet.E < 0) {
+        line(planet.gd/sscale, planet.y/sscale, planet.x/sscale, planet.y/sscale);
+    }
     translate(-planet.fd/sscale, 0);
     rotate(-planet.phi);
+    // the planet
     translate(planet.r.x/sscale, planet.r.y/sscale);
     stroke(100, 100, 255, 200);
     line(0, 0, 200*planet.v.x/vscale, 200*planet.v.y/vscale);
@@ -75,17 +96,27 @@ function star() {
         ellipse(0, 0, w, w);
     }
 }
-
+// number of iterations in leap-frog method
+let leaps = 100;
 function animate() {
     if (playing) {
-        planet.t += (millis()-time) * tscale;
+        let delt = (millis()-time) * tscale;
+        planet.t += delt;
         if (planet.E < 0) {
             planet.M = TAU*planet.t / planet.T;
             planet.u = findxgiveni(planet.u, x => planet.M+(planet.e*sin(x)), 0.0001);
             planet.adjustThetaToU();
             planet.adjustToTheta();
-            time = millis();
+        } else {
+            if (planet.h.z < 0) {
+                //delt = -delt;
+            }
+            for (let i = 0; i < leaps; i++) {
+                planet.theta = planet.theta + (planet.angularSpeed*(delt / leaps));
+                planet.adjustToTheta();
+            }
         }
+        time = millis();
     }
 }
 
