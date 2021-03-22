@@ -16,7 +16,7 @@ let log;
 function setup() {
     createCanvas(innerWidth, innerHeight-4);
     biglength = sqrt(sq(width)+sq(height));
-    planet = new Planet(-84600000000, -74250000000, 0, -3.029e4);
+    planet = new Planet(-1.521e11, 0, 0, -3.029e4);
     time = millis();
     interact();
     log = new Log();
@@ -80,7 +80,7 @@ function planetAndOrbit(planet) {
     // the planet
     translate(planet.r.x/sscale, planet.r.y/sscale);
     stroke(100, 100, 255, 200);
-    line(0, 0, 200*planet.v.x/vscale, 200*planet.v.y/vscale);
+    line(0, 0, 200*planet.v.x*4.5e3/sscale, 200*planet.v.y*4.5e3/sscale);
     noStroke();
     fill(0, 255, 0);
     ellipse(0, 0, planet.d*350/sscale, planet.d*350/sscale);
