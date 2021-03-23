@@ -100,7 +100,7 @@ function interact() {
             spaceTime.html("time");
             zoomOut.html("x.83");
             zoomIn.html("x1.2");
-            spaceScale.html(`1 sec represents ${manageTime(tscale)}`);
+            spaceScale.html(`1 sec represents ${manageTime(tscale*1000)}`);
             spaceTime.style("backgroundColor", timeColor);
             zoomOut.style("backgroundColor", timeColor);
             zoomIn.style("backgroundColor", timeColor);
@@ -138,7 +138,7 @@ function interact() {
         } else {
             tscale /= 1.2;
             vscale = sscale / tscale;
-            spaceScale.html(`1 sec represents ${manageTime(tscale)}`);
+            spaceScale.html(`1 sec represents ${manageTime(tscale*1000)}`);
         }
     });
     zoomOut.position((width * 2 / 3) - 120, height-25);
@@ -153,14 +153,11 @@ function interact() {
         } else {
             tscale *= 1.2;
             vscale = sscale / tscale;
-            spaceScale.html(`1 sec represents ${manageTime(tscale)}`);
+            spaceScale.html(`1 sec represents ${manageTime(tscale*1000)}`);
         }
     });
     zoomIn.position((width*2/3) - 79, height-25);
     zoomIn.style("width", "40px");
     zoomIn.style("backgroundColor", spaceColor);
-
-    
-    
 }
 

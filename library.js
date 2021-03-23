@@ -124,6 +124,7 @@ class Log {
         this.initiateVariable("distance", "distance", "Distance", "meter");
         this.initiateVariable("speed", "speed", "Speed", "meter per second");
         this.initiateVariable("acceleration", "acceleration", "Acceleration", "meter per second squared");
+        this.initiateVariable("star_mass", "starMass", "Mass of star", "kg");
         this.initiateVariable("total_energy", "totalEnergy", "Total energy (per unit mass)", "joule per kg");
         this.initiateVariable("kinetic_energy", "kineticEnergy", "Kinetic energy", "joule per kg");
         this.initiateVariable("gravitational_energy", "gravitationalEnergy", "Gravitational potential erergy", "joule per kg");

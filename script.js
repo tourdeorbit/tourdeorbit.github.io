@@ -149,6 +149,7 @@ function logger() {
     set("distance", planet.r.mag(), ip);
     set("speed", planet.v.mag(), ip);
     set("acceleration", mu/sq(planet.r.mag()), ip);
+    set("starMass", M, ip);
     set("totalEnergy", planet.E, ip);
     set("kineticEnergy", 0.5*sq(planet.v.mag()), ip);
     set("gravitationalEnergy", -mu/planet.r.mag(), ip);
