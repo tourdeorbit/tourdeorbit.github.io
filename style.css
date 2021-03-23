@@ -23,7 +23,7 @@ button {
     position: absolute;
     width: 33%;
     right: 0;
-    margin: 2rem 0;
+    margin: 2rem 0 2rem 65%;
     margin-right: 1rem;
     color: white;
     display: flex;
